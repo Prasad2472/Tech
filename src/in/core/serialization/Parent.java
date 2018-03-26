@@ -6,7 +6,7 @@ package in.core.serialization;
 import java.io.Serializable;
 
 /**
- * @author Prasad Boini
+ * @author Prasad
  *
  */
 public class Parent implements Serializable  {

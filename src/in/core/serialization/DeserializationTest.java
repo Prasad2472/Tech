@@ -25,7 +25,7 @@ public class DeserializationTest {
 	public static void main(String[] args) {
 		Child deserilazedChild = null;
 		try (FileInputStream fileInputStream = new FileInputStream(
-				"C:\\\\Users\\\\pboini\\\\Desktop\\\\Aviva\\\\parent.ser");
+				"Directory.ser");
 				ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
 
 			deserilazedChild = (Child) objectInputStream.readObject();

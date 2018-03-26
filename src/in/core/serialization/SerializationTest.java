@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
- * @author Prasad Boini
+ * @author Prasad
  *
  */
 public class SerializationTest {
@@ -21,7 +21,7 @@ public class SerializationTest {
 
 		Child child = new Child(20, 10);
 
-		try (FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\pboini\\Desktop\\Aviva\\parent.ser");
+		try (FileOutputStream fileOutputStream = new FileOutputStream("parent.ser");
 				ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);) {
 			objectOutputStream.writeObject(child);
 			System.out.println("Object is Serialized....");
