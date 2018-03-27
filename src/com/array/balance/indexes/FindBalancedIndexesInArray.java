@@ -10,17 +10,16 @@ import java.util.Set;
  * @author Prasad
  *
  */
-public class FindBalancedIndexes {
+public class FindBalancedIndexesInArray {
 
-	public static void main(String[] args) {
-		System.out.println(getIndexes(new int[] { 5, 0, -5, 4 }));
+	public static void main(final String[] args) {
+		System.out.println(getIndexes(new int[] { 1, 2, 1, 3 }));
 		System.out.println(getIndexes(new int[] { 1, 2, 1 }));
 	}
 
-	private static Set<Integer> getIndexes(int[] arr) {
-		Set<Integer> indexes = new HashSet<>();
+	private static Set<Integer> getIndexes(final int[] arr) {
+		final Set<Integer> indexes = new HashSet<>();
 		int leftElementsSum = 0;
-		int rightElementsMultiplication = 0;
 		if (arr == null || arr.length == 0 || arr.length == 2) {
 			// return Empty set
 			return indexes;
@@ -31,22 +30,26 @@ public class FindBalancedIndexes {
 			return indexes;
 		}
 		/**
+		 * If the Array doesn't have zero, elements, then Time Complexity is O(n).
+		 */
+
+		int product = arr[0];
+		/**
+		 * Calculate Product of the array elements
+		 */
+		for (int i = 1; i < arr.length; i++) {
+			product *= arr[i];
+		}
+		/**
 		 * Time Complexity O(n)
 		 */
 		for (int i = 1; i < arr.length; i++) {
 			// Calculate Previous Elements sum
 			leftElementsSum += arr[i - 1];
-			// Reset last element
-			rightElementsMultiplication = arr[arr.length - 1];
-			// Calculate multiplication
-			/**
-			 * Time Complexity becomes here O(n2)[N square]
-			 */
-			for (int j = arr.length - 2; j > i; j--) {
-				rightElementsMultiplication = rightElementsMultiplication * arr[j];
-			}
+			// calculate Product
+			product = product / arr[i];
 			// Check Previous Sum and Next Multiplication is Equal..
-			if (leftElementsSum == rightElementsMultiplication) {
+			if (leftElementsSum == product) {
 				indexes.add(i);
 			}
 		}
@@ -59,5 +62,4 @@ public class FindBalancedIndexes {
 		}
 		return indexes;
 	}
-
 }
