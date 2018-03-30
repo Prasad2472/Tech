@@ -3,7 +3,9 @@
  */
 package com.array.balance.indexes;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,14 +15,15 @@ import java.util.Set;
 public class FindBalancedIndexesInArray {
 
 	public static void main(final String[] args) {
+		System.out.println(getIndexes(new int[] { 5, 0, -5, 4 }));
+		System.out.println(getIndexes(new int[] { 5, 0, -5, 4, 0, 2, 2 }));
 		System.out.println(getIndexes(new int[] { 1, 2, 1, 3 }));
-		System.out.println(getIndexes(new int[] { 1, 2, 1 }));
 	}
 
 	private static Set<Integer> getIndexes(final int[] arr) {
 		final Set<Integer> indexes = new HashSet<>();
 		int leftElementsSum = 0;
-		if (arr == null || arr.length == 0 || arr.length == 2) {
+		if (arr == null || arr.length == 0) {
 			// return Empty set
 			return indexes;
 		}
@@ -30,26 +33,44 @@ public class FindBalancedIndexesInArray {
 			return indexes;
 		}
 		/**
-		 * If the Array doesn't have zero, elements, then Time Complexity is O(n).
+		 * Product Map should hold the Product Of The the particular index.
 		 */
+		final Map<Integer, Integer> productMap = new HashMap<Integer, Integer>();
 
-		int product = arr[0];
+		int product = arr[arr.length - 1];
+		/**
+		 * last But one
+		 */
+		productMap.put(arr.length - 2, product);
+		/**
+		 * For the last in Array the Product should be zero.
+		 */
+		productMap.put(arr.length - 1, 0);
 		/**
 		 * Calculate Product of the array elements
 		 */
-		for (int i = 1; i < arr.length; i++) {
+		for (int i = arr.length - 2; i > 0; i--) {
 			product *= arr[i];
+			productMap.put(i - 1, product);
 		}
+		/**
+		 * For the First Element.
+		 */
+		productMap.put(0, product);
 		/**
 		 * Time Complexity O(n)
 		 */
-		for (int i = 1; i < arr.length; i++) {
+		for (int i = 0; i < arr.length; i++) {
 			// Calculate Previous Elements sum
-			leftElementsSum += arr[i - 1];
+			if (i != 0) {
+				leftElementsSum += arr[i - 1];
+			}
 			// calculate Product
-			product = product / arr[i];
 			// Check Previous Sum and Next Multiplication is Equal..
-			if (leftElementsSum == product) {
+			/**
+			 * The Time Complexity of Map.get(key) is O(1)
+			 */
+			if (leftElementsSum == productMap.get(i)) {
 				indexes.add(i);
 			}
 		}
