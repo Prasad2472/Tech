@@ -45,7 +45,6 @@ public class CircularLinkedList {
 			} else {
 				circular.add(integer);
 			}
-
 		}
 		return isCircular;
 	}
