@@ -15,7 +15,7 @@ public class Crash {
 	public static void main(String[] args) {
 
 		Object[] o = null;
-
+//		System.exit(1);
 		while (true) {
 			o = new Object[] { o };
 		}
@@ -25,6 +25,7 @@ public class Crash {
 		 * exceeded at com.core.jvm.crash.Crash.main(Crash.java:20)
 		 * 
 		 */
+	
 	}
 
 }
